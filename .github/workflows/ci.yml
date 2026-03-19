@@ -10,18 +10,24 @@ jobs:
   test-the-code:
     # 3. THE ENVIRONMENT: What operating system should the GitHub server use?
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     # 4. THE STEPS: The checklist for the server to follow
     steps:
     # Step A: Download your project files onto the GitHub server
     - name: Grab the code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     # Step B: Install Python on the server
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12' # Specify your Python version
+
+    # Step B.5: Install system dependencies for PyAudio
+    - name: Install system dependencies
+      run: sudo apt-get update && sudo apt-get install -y portaudio19-dev python3-dev
 
     # Step C: Install your project's dependencies
     - name: Install dependencies
