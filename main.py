@@ -71,7 +71,7 @@ def voice_listener():
                     time.sleep(1)
 
 def main():
-    global running, last_trigger_time
+    global running
 
     BaseOptions = mp.tasks.BaseOptions
     HandLandmarker = mp.tasks.vision.HandLandmarker
